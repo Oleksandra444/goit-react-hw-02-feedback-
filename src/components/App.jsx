@@ -10,11 +10,28 @@ export class App extends Component  {
   bad: 0
   }
 
-  onLeaveFeedback = () => { };
+  onLeaveFeedback = ({ target: { name } }) => {this.setState(prevState => ({
+      [name]: prevState[name] + 1,
+  }));
+  };
   
-  render()
+  onCountTotalFeedback = () => { return Object.values(this.state).reduce((total, curr) => (total + curr))};
+
+  onCountPercentageFeedback = totalFeedback => {
+    const { good } = this.state;
+
+    if (totalFeedback > 0) return Math.round((good / totalFeedback) * 100);
+    return 0;
+  };
+
+  
+    render() 
     
-  {
+    {
+      const totalFeedback = this.onCountTotalFeedback();
+      const positiveFeedback = this.onCountPercentageFeedback(totalFeedback);
+
+
     return (
       <div
         style={{
@@ -30,7 +47,7 @@ export class App extends Component  {
         <SectionTitle title='Please leave feedback'>
           <FeedbackOptions options={ Object.keys(this.state)}  onLeaveFeedback={this.onLeaveFeedback}/>
         </SectionTitle>
-        <SectionTitle title='Statistics'> <Statistic options={ Object.entries(this.state)}/></SectionTitle>
+        <SectionTitle title='Statistics'> <Statistic options={Object.entries(this.state)} total={totalFeedback} positivePercentage={positiveFeedback} /></SectionTitle>
       </div>
     );
   }
