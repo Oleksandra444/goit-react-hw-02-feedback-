@@ -1,7 +1,9 @@
+import { NotificationMessageText } from "./NotificationMessage.styles"
+
 export const NotificationMessage = () => {
     return (
         <div>
-            <p>There is no feedback</p>
+            <NotificationMessageText>There is no feedback</NotificationMessageText>
     </div>
 )
 }

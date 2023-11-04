@@ -1,12 +1,13 @@
 // import { Component } from "react"; 
+import { Title, SectionWrapper } from './SectionTitle.styled.js' 
 
 export const SectionTitle = ({ title, children }) => (
     <>
-    <section>
-    <h1>
+    <SectionWrapper>
+    <Title>
     {title}
-    </h1>
+    </Title>
         {children}
-        </section>
+        </SectionWrapper>
     </>
 )

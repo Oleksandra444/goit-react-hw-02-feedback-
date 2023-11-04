@@ -3,6 +3,9 @@ import { SectionTitle } from "./SectionTitle/SectionTitle";
 import { FeedbackOptions } from "./FeedbackOptions/FeedbackOptions";
 import { Statistic } from "./Statistic/Statistic";
 import { NotificationMessage } from "./NotificationMessage/NotificationMessage";
+import background from "../images/bcg-1.jpg";
+import { GlobalStyle } from "./GlobalStyle";
+// import styled from "styled-components";
 
 export class App extends Component  {
   state = { 
@@ -19,9 +22,9 @@ export class App extends Component  {
   onCountTotalFeedback = () => { return Object.values(this.state).reduce((total, curr) => (total + curr))};
 
   onCountPercentageFeedback = totalFeedback => {
-    const { good } = this.state;
+    const { good, neutral } = this.state;
 
-    if (totalFeedback > 0) return Math.round((good / totalFeedback) * 100);
+    if (totalFeedback > 0) return Math.round(((good + neutral) / totalFeedback) * 100);
     return 0;
   };
 
@@ -34,21 +37,20 @@ export class App extends Component  {
 
 
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101'
-        }}
-
-      >
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '20%', height: '100vh',  }}>
+          <header style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', }}></header>
+        </div>
+        <div style={{ width: '60%', textAlign: 'center', }}>
         <SectionTitle title='Please leave feedback'>
           <FeedbackOptions options={ Object.keys(this.state)}  onLeaveFeedback={this.onLeaveFeedback}/>
         </SectionTitle>
-        <SectionTitle title='Statistics'> {totalFeedback?<Statistic options={Object.entries(this.state)} total={totalFeedback} positivePercentage={positiveFeedback} /> : <NotificationMessage/>} </SectionTitle>
+          <SectionTitle title='Statistics'> {totalFeedback ? <Statistic options={Object.entries(this.state)} total={totalFeedback} positivePercentage={positiveFeedback} /> : <NotificationMessage />} </SectionTitle>
+        </div>
+        <div style={{ width: '20%', height: '100vh',  }}>
+          <footer style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', }}></footer>
+        </div>
+        <GlobalStyle/>
       </div>
     );
   }
