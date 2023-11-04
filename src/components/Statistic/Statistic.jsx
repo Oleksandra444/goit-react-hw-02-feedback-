@@ -1,4 +1,5 @@
-import { StatisticList, StatisticListItem, TotalCountWrapper, PositiveCountWrapper, TotalCountTitle, PositiveCountTitle } from "./Statistic.styled"
+import { StatisticList, StatisticListItem, TotalCountWrapper, PositiveCountWrapper, TotalCountTitle, PositiveCountTitle } from "./Statistic.styled";
+import { SiBuymeacoffee} from 'react-icons/si'
 
 export const Statistic = ({ options, total, positivePercentage }) => { 
     return (
@@ -11,7 +12,7 @@ export const Statistic = ({ options, total, positivePercentage }) => {
                 <TotalCountTitle>Total: <span> { total} </span></TotalCountTitle>
             </TotalCountWrapper>
             <PositiveCountWrapper>
-                <PositiveCountTitle>Positive feedback: <span>{positivePercentage } %</span></PositiveCountTitle>
+                <PositiveCountTitle><SiBuymeacoffee /> Positive feedback: <span>{positivePercentage } %</span></PositiveCountTitle>
             </PositiveCountWrapper>
             </div>
 
